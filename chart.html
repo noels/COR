@@ -1,34 +1,63 @@
 <html>
 <head>
-<script type="text/javascript" src="https://www.google.com/jsapi"></script>
-<script type="text/javascript">
-google.load("visualization", '1', {packages:['corechart']});
-google.setOnLoadCallback(drawChart);
-function drawChart() {
-  var query = new google.visualization.Query(
-      'https://docs.google.com/spreadsheets/d/19nKuPp1xQVWclduV1Jmfh1M67CgvloQh_PFpDMPs3Hk/edit?usp=sharing&range=A2:B8');
-  query.send(handleQueryResponse);
-}
+    <script src="//ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js"></script>
+    <script type="text/javascript" src="https://www.google.com/jsapi"></script>
+    <script type="text/javascript">
+        google.load("visualization", '1', {packages:['corechart']});
+        google.setOnLoadCallback(chartLoad);
+        $(function() {
+            var charts = [
+                'Capabilities',
+                'Capabilities_1',
+                'Capabilities_2',
+                'Capabilities_3',
+                'Capabilities_4',
+            ];
+            var option = '';
+            for (i=0;i<charts.length;i++){
+               option += '<option value="'+ charts[i] + '">' + charts[i] + '</option>';
+            }
+            $('#charts').append(option);
+            $('#charts').change(function() {
+                drawChart($('#charts').val());
+            });
 
-function handleQueryResponse(response) {
-  if (response.isError()) {
-    alert('Error in query: ' + response.getMessage() + ' ' + response.getDetailedMessage());
-    return;
-  }
+        });
+        function chartLoad() {
+            drawChart($('#charts').val());
+        }
+        function drawChart(sheetName) {
+          var query = new google.visualization.Query(
+              'https://docs.google.com/spreadsheets/d/19nKuPp1xQVWclduV1Jmfh1M67CgvloQh_PFpDMPs3Hk/edit?usp=sharing&range=A2:B100&sheet=' + sheetName);
+          query.send(handleQueryResponse);
+        }
 
-  var data = response.getDataTable();
-  var chart = new google.visualization.ColumnChart(document.getElementById('chart'));
-  var options = {
-    legend: { position: 'none' },
-  };
-  chart.draw(data, options);
-}
-</script>
+        function handleQueryResponse(response) {
+          if (response.isError()) {
+            alert('Error in query: ' + response.getMessage() + ' ' + response.getDetailedMessage());
+            return;
+          }
 
-<title>Data from a Spreadsheet</title>
+          var data = response.getDataTable();
+          var formatter = new google.visualization.DateFormat({formatType: 'short'});
+          formatter.format(data, 0);
+          var chart = new google.visualization.ColumnChart(document.getElementById('chart'));
+          var options = {
+            legend: { position: 'none' },
+            vAxis: {format: "##%" },
+
+          };
+          chart.draw(data, options);
+        }
+    </script>
+
+    <title>Data from a Spreadsheet</title>
 </head>
 
 <body>
-<span id='chart'></span>
+    <select id="charts">
+    </select>
+    <span id='chart'></span>
+
 </body>
 </html>
