@@ -70,29 +70,31 @@
         }
 
         function handleQueryResponse(response) {
-          if (response.isError()) {
-            alert('Error in query: ' + response.getMessage() + ' ' + response.getDetailedMessage());
-            return;
-          }
+            if (response.isError()) {
+                alert('Error in query: ' + response.getMessage() + ' ' + response.getDetailedMessage());
+                return;
+            }
 
-          var sheetName = $('#charts').val();
-          var data = response.getDataTable();
-          var formatter = new google.visualization.DateFormat({formatType: 'short'});
-          formatter.format(data, 0);
-          var chart;
-          if (charts[sheetName]["chartType"] == "pie"){
-            chart =  new google.visualization.PieChart(document.getElementById('chart'));
-          } else {
-            chart = new google.visualization.LineChart(document.getElementById('chart'));
-          }
-          var options = {
-            legend: { position: 'none' },
-          };
-          if (charts[sheetName]["vAxis"]){
-            options["vAxis"] = charts[sheetName]["vAxis"];
-          }
+            var sheetName = $('#charts').val();
+            var data = response.getDataTable();
+            var formatter = new google.visualization.DateFormat({formatType: 'short'});
+            formatter.format(data, 0);
+            var chart;
+            if (charts[sheetName]["chartType"] == "pie"){
+                chart =  new google.visualization.PieChart(document.getElementById('chart'));
+            } else if (charts[sheetName]["chartType"] == 'bar' ){
+                chart = new google.visualization.ColumnChart(document.getElementById('chart'));
+            } else {
+                chart = new google.visualization.LineChart(document.getElementById('chart'));
+            }
+            var options = {
+                legend: { position: 'none' },
+            };
+            if (charts[sheetName]["vAxis"]){
+                options["vAxis"] = charts[sheetName]["vAxis"];
+            }
 
-          chart.draw(data, options);
+            chart.draw(data, options);
         }
     </script>
 
