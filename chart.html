@@ -6,47 +6,11 @@
         google.load("visualization", '1', {packages:['corechart']});
         google.setOnLoadCallback(chartLoad);
         $(function() {
-            var charts = [
-                'Capabilities',
-                'Capabilities_1',
-                'Capabilities_2',
-                'Capabilities_3',
-                'Capabilities_4',
-                'Capabilities_5',
-                'Digital_1',
-                'Digital_2',
-                'Digital_3',
-                'Digital_4',
-                'Digital_5',
-                'Digital_6',
-                'Digital_7',
-                'Digital_8',
-                'TW3',
-                'TW3_1',
-                'TW3_2',
-                'TW3_3',
-                'TW3_4',
-                'TW3_5',
-                'TW3_6',
-                'TW3_7',
-                'TW3_8',
-                'TW3_9',
-                'TW3_10',
-                'TW3_11',
-                'OPM',
-                'OPM_1',
-                'MPA',
-                'MPA_1',
-                'MPA_2',
-                'MPA_3',
-                'MPA_4',
-                'MPA_5',
-                'MPA_6',
-                'MPA_7',
-            ];
             var option = '';
-            for (i=0;i<charts.length;i++){
-               option += '<option value="'+ charts[i] + '">' + charts[i] + '</option>';
+            for (var chart in charts) {
+                if (charts.hasOwnProperty(chart)) {
+                   option += '<option value="'+ chart + '">' + chart + '</option>';
+                }
             }
             $('#charts').append(option);
             $('#charts').change(function() {
@@ -56,6 +20,45 @@
         var formats = {
             Capabilities_3: {vAxis: {format: "##%" }},
             Capabilities_4: {vAxis: {format: "##%" }},
+        };
+
+        var charts = {
+                Capabilities:{},
+                Capabilities_1:{},
+                Capabilities_2:{},
+                Capabilities_3:{vAxis: {format: "##%" }},
+                Capabilities_4:{vAxis: {format: "##%" }},
+                Capabilities_5:{},
+                Digital_1:{},
+                Digital_2:{},
+                Digital_3:{},
+                Digital_4:{},
+                Digital_5:{},
+                Digital_6:{},
+                Digital_7:{},
+                Digital_8:{},
+                TW3:{},
+                TW3_1:{},
+                TW3_2:{},
+                TW3_3:{},
+                TW3_4:{},
+                TW3_5:{},
+                TW3_6:{},
+                TW3_7:{},
+                TW3_8:{},
+                TW3_9:{},
+                TW3_10:{},
+                TW3_11:{},
+                OPM:{},
+                OPM_1:{},
+                MPA:{},
+                MPA_1:{},
+                MPA_2:{},
+                MPA_3:{},
+                MPA_4:{},
+                MPA_5:{},
+                MPA_6:{},
+                MPA_7:{},
         };
         function chartLoad() {
             drawChart($('#charts').val());
@@ -80,8 +83,8 @@
             legend: { position: 'none' },
           };
           var sheetName = $('#charts').val();
-          if (formats[sheetName]){
-            options["vAxis"] = formats[sheetName]["vAxis"];
+          if (charts[sheetName]["vAxis"]){
+            options["vAxis"] = charts[sheetName]["vAxis"];
           }
 
           chart.draw(data, options);
