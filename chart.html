@@ -52,8 +52,11 @@
             $('#charts').change(function() {
                 drawChart($('#charts').val());
             });
-
         });
+        var formats = {
+            Capabilities_3: {vAxis: {format: "##%" }},
+            Capabilities_4: {vAxis: {format: "##%" }},
+        };
         function chartLoad() {
             drawChart($('#charts').val());
         }
@@ -76,6 +79,10 @@
           var options = {
             legend: { position: 'none' },
           };
+          var sheetName = $('#charts').val();
+          if (formats[sheetName]){
+            options["vAxis"] = formats[sheetName]["vAxis"];
+          }
 
           chart.draw(data, options);
         }
