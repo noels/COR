@@ -48,8 +48,20 @@ var charts = {
 };
 
 
+function _alertError(msg) {
+  var div = $('<div class="error">' + msg + '</div>');
+  $('#messages').append(div);
+  setTimeout(function() {
+    div.fadeOut(500);
+  }, 2000);
+};  
+
+
 function drawChart(sheetName) {
   var range = 'range=A2:B100';
+
+  $("#loading").show();
+  $("#chart").hide();
 
   var chartOptions = charts[sheetName] || {};
 
@@ -58,49 +70,65 @@ function drawChart(sheetName) {
   }
   var query = new google.visualization.Query(
       'https://docs.google.com/spreadsheets/d/19nKuPp1xQVWclduV1Jmfh1M67CgvloQh_PFpDMPs3Hk/edit?usp=sharing&' + range + '&sheet=' + sheetName);
-  query.send(handleQueryResponse);
+
+  query.send(function(response) {
+    handleQueryResponse(sheetName, response);
+  });
 }
 
-function handleQueryResponse(response) {
-    if (response.isError()) {
-        alert('Error in query: ' + response.getMessage() + ' ' + response.getDetailedMessage());
-        return;
-    }
+function handleQueryResponse(sheetName, response) {
+  if (!$('#loading').is(':visible')) {
+    return;
+  }
 
-    var sheetName = $('#charts').val();
+  if (response.isError()) {
+      _alertError('Error in query: ' + response.getMessage() + ' ' + response.getDetailedMessage());
+      return;
+  }
 
-    var data = response.getDataTable();
-    var formatter = new google.visualization.DateFormat({formatType: 'short'});
-    formatter.format(data, 0);
-    
-    var chartOptions = charts[sheetName] || {};
-    
-    var chart;
-    switch (chartOptions.chartType) {
-      case 'pie':
-        chart =  new google.visualization.PieChart(document.getElementById('chart'));
-        break;
-      case 'bar':
-        chart = new google.visualization.ColumnChart(document.getElementById('chart'));
-        break;
-      default:
-        chart = new google.visualization.LineChart(document.getElementById('chart'));
-    }
+  var sheetName = $('#charts').val() || sheetName;
 
-    var options = {
-        legend: { position: 'none' },
-    };
+  var data = response.getDataTable();
+  var formatter = new google.visualization.DateFormat({formatType: 'short'});
+  formatter.format(data, 0);
+  
+  var chartOptions = charts[sheetName] || {};
+  
+  var chart;
+  switch (chartOptions.chartType) {
+    case 'pie':
+      chart =  new google.visualization.PieChart(document.getElementById('chart'));
+      break;
+    case 'bar':
+      chart = new google.visualization.ColumnChart(document.getElementById('chart'));
+      break;
+    default:
+      chart = new google.visualization.LineChart(document.getElementById('chart'));
+  }
 
-    if (chartOptions.vAxis){
-        options["vAxis"] = chartOptions.vAxis;
-    }
+  var options = {
+    title: sheetName,
+    chartArea: {
+      width: '90%',
+      height: '80%',
+    },
+    height: $('#chart_container').height() * 0.8,
+    width: $('#chart_container').width() * 0.9,
+    legend: { 
+      position: 'none' 
+    },
+  };
 
-    google.visualization.events.addListener(chart, 'ready', function(){
-      $('#loading').hide();
-      $("#chart").show();
-    });
+  if (chartOptions.vAxis){
+      options["vAxis"] = chartOptions.vAxis;
+  }
 
-    chart.draw(data, options);
+  google.visualization.events.addListener(chart, 'ready', function(){
+    $('#loading').hide();
+    $("#chart").show();
+  });
+
+  chart.draw(data, options);
 }
 
 
@@ -116,10 +144,10 @@ function _addMindmapNodes(chartNode, mindMapNode) {
     var nodeIsLeaf = false;
     var _processNodeClick = function() {
       if (nodeIsLeaf) {
-        $('#loading').show();
         drawChart(key);
+        $('#chart_container').show();
       } else {
-        $('#chart').hide();
+        $('#chart_container').hide();
       }
     }
 
@@ -173,8 +201,15 @@ function drawOverviewDiagram() {
 var onLibsReady = function() {
   $(function() {
     drawOverviewDiagram();
+
+    $("#chart_container").unbind().click(function() {
+      $("#chart_container").hide();
+    });
   });
 };
+
+
+
 
 
 

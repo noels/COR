@@ -43,13 +43,10 @@
   border-width:8px !important;
   background: #f89a3a;
 }
-.js-mindmap-active .node.root {
-  background: #9ed6a1 !important;
-}
 .js-mindmap-active .node.activeparent {
   padding:8px !important;
   border-width:8px !important;
-  background:#c64d44; 
+  background:#9ed6a1;/*#c64d44*/
 }
 .js-mindmap-active .node div {
   position: absolute;
