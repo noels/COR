@@ -5,17 +5,20 @@ var charts = {
     Capabilities_2:null,
     Capabilities_3:[{vAxis: {format: "##%" }}],
     Capabilities_4:[{vAxis: {format: "##%" }}],
-    Capabilities_5:null,
+    Capabilities_5:null
   },
   Digital: {
-    Digital_1:[{dataRange: "A1B6", chartType:"pie",}],
+    Digital_1:[{
+      dataRange: "A1B6", 
+      chartType:"pie"
+    }],
     Digital_2:null,
     Digital_3:null,
     Digital_4:null,
     Digital_5:null,
     Digital_6:null,
     Digital_7:null,
-    Digital_8:null,
+    Digital_8:null
   },
   TW3: {
     TW3:null,
@@ -29,11 +32,11 @@ var charts = {
     TW3_8:null,
     TW3_9:null,
     TW3_10:null,
-    TW3_11:null,
+    TW3_11:null
   },
   OPM: {
     OPM:null,
-    OPM_1:null,
+    OPM_1:null
   },
   MPA: {
     MPA:null,
@@ -43,8 +46,8 @@ var charts = {
     MPA_4:null,
     MPA_5:null,
     MPA_6:null,
-    MPA_7:null,
-  },
+    MPA_7:null
+  }
 };
 
 
@@ -110,13 +113,13 @@ function handleQueryResponse(sheetName, response) {
     title: sheetName,
     chartArea: {
       width: '90%',
-      height: '80%',
+      height: '80%'
     },
     height: $('#chart_container').height() * 0.8,
     width: $('#chart_container').width() * 0.9,
     legend: { 
       position: 'none' 
-    },
+    }
   };
 
   if (chartOptions.vAxis){
@@ -140,7 +143,9 @@ function _addMindmapNodes(chartNode, mindMapNode) {
 
   var keys = Object.keys(chartNode);
 
-  keys.forEach(function(key) {
+  for (var keyIndex in keys) {
+    var key = keys[keyIndex];
+
     var nodeIsLeaf = false;
     var _processNodeClick = function() {
       if (nodeIsLeaf) {
@@ -169,7 +174,7 @@ function _addMindmapNodes(chartNode, mindMapNode) {
     if (!_addMindmapNodes(chartNode[key], thisNode)) {
       nodeIsLeaf = true;
     }
-  });
+  }
 
   return true;
 }
@@ -179,7 +184,7 @@ function drawOverviewDiagram() {
   var dataElem = $('#overview');
   
   $('body').mindmap({
-    timeperiod: 20,
+    timeperiod: 20
   });
 
   // root node
@@ -197,8 +202,7 @@ function drawOverviewDiagram() {
 }
 
 
-
-var onLibsReady = function() {
+window.onLibsReady = function() {
   $(function() {
     drawOverviewDiagram();
 
