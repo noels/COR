@@ -1,110 +1,32 @@
 <html>
 <head>
-    <script src="//ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js"></script>
-    <script type="text/javascript" src="https://www.google.com/jsapi"></script>
-    <script type="text/javascript">
-        google.load("visualization", '1', {packages:['corechart']});
-        google.setOnLoadCallback(chartLoad);
-        $(function() {
-            var option = '';
-            for (var chart in charts) {
-                if (charts.hasOwnProperty(chart)) {
-                   option += '<option value="'+ chart + '">' + chart + '</option>';
-                }
-            }
-            $('#charts').append(option);
-            $('#charts').change(function() {
-                drawChart($('#charts').val());
-            });
-        });
-
-        var charts = {
-                Capabilities:{chartType:"bar",},
-                Capabilities_1:{},
-                Capabilities_2:{},
-                Capabilities_3:{vAxis: {format: "##%" }},
-                Capabilities_4:{vAxis: {format: "##%" }},
-                Capabilities_5:{},
-                Digital_1:{dataRange: "A1B6", chartType:"pie",},
-                Digital_2:{},
-                Digital_3:{},
-                Digital_4:{},
-                Digital_5:{},
-                Digital_6:{},
-                Digital_7:{},
-                Digital_8:{},
-                TW3:{},
-                TW3_1:{},
-                TW3_2:{},
-                TW3_3:{},
-                TW3_4:{},
-                TW3_5:{},
-                TW3_6:{},
-                TW3_7:{},
-                TW3_8:{},
-                TW3_9:{},
-                TW3_10:{},
-                TW3_11:{},
-                OPM:{},
-                OPM_1:{},
-                MPA:{},
-                MPA_1:{},
-                MPA_2:{},
-                MPA_3:{},
-                MPA_4:{},
-                MPA_5:{},
-                MPA_6:{},
-                MPA_7:{},
-        };
-        function chartLoad() {
-            drawChart($('#charts').val());
-        }
-        function drawChart(sheetName) {
-          var range = 'range=A2:B100';
-          if (charts[sheetName]['dataRange']) {
-            range = charts[sheetName]['dataRange'];
-          }
-          var query = new google.visualization.Query(
-              'https://docs.google.com/spreadsheets/d/19nKuPp1xQVWclduV1Jmfh1M67CgvloQh_PFpDMPs3Hk/edit?usp=sharing&' + range + '&sheet=' + sheetName);
-          query.send(handleQueryResponse);
-        }
-
-        function handleQueryResponse(response) {
-            if (response.isError()) {
-                alert('Error in query: ' + response.getMessage() + ' ' + response.getDetailedMessage());
-                return;
-            }
-
-            var sheetName = $('#charts').val();
-            var data = response.getDataTable();
-            var formatter = new google.visualization.DateFormat({formatType: 'short'});
-            formatter.format(data, 0);
-            var chart;
-            if (charts[sheetName]["chartType"] == "pie"){
-                chart =  new google.visualization.PieChart(document.getElementById('chart'));
-            } else if (charts[sheetName]["chartType"] == 'bar' ){
-                chart = new google.visualization.ColumnChart(document.getElementById('chart'));
-            } else {
-                chart = new google.visualization.LineChart(document.getElementById('chart'));
-            }
-            var options = {
-                legend: { position: 'none' },
-            };
-            if (charts[sheetName]["vAxis"]){
-                options["vAxis"] = charts[sheetName]["vAxis"];
-            }
-
-            chart.draw(data, options);
-        }
-    </script>
-
-    <title>Data from a Spreadsheet</title>
+  <title>COR data graphs</title>
+  <link rel="stylesheet" href="css/reset.css" />
+  <link rel="stylesheet" href="css/js-mindmap.css" />
+  <link rel="stylesheet" href="css/chart.css" />
 </head>
-
 <body>
-    <select id="charts">
-    </select>
-    <span id='chart'></span>
+  <div id="overview"></div>
 
+  <div id="chart_container">
+    <div id="loading">
+      <p>Please wait, loading chart...</p>
+    </div>
+    <div id='chart'></div>
+  </div>
+
+  <div id='messages'></div>
+ 
+  <script type="text/javascript" src="js/es5-shim.js"></script>
+  <script type="text/javascript" src="https://www.google.com/jsapi"></script>
+  <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/1.4.2/jquery.js"></script>
+  <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jqueryui/1.8.1/jquery-ui.js"></script>
+  <script type="text/javascript" src="js/raphael.js"></script>
+  <script type="text/javascript" src="js/js-mindmap.js"></script>
+  <script type="text/javascript" src="js/chart.js"></script>
+  <script type="text/javascript">
+    google.load("visualization", '1', {packages:['corechart', 'wordtree']});
+    google.setOnLoadCallback(window.onLibsReady);
+  </script>
 </body>
 </html>
