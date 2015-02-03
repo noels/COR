@@ -150,8 +150,10 @@ function _addMindmapNodes(chartNode, mindMapNode) {
     var _processNodeClick = function() {
       if (nodeIsLeaf) {
         drawChart(key);
+        $('#chart_container_holder').show();
         $('#chart_container').show();
       } else {
+        $('#chart_container_holder').hide();
         $('#chart_container').hide();
       }
     }
