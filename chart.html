@@ -8,11 +8,13 @@
 <body>
   <div id="overview"></div>
 
-  <div id="chart_container">
-    <div id="loading">
-      <p>Please wait, loading chart...</p>
+  <div id="chart_container_holder"><!-- extra container div needed for IE-8 z-index to work -->
+    <div id="chart_container">
+      <div id="loading">
+        <p>Please wait, loading chart...</p>
+      </div>
+      <div id='chart'></div>
     </div>
-    <div id='chart'></div>
   </div>
 
   <div id='messages'></div>
