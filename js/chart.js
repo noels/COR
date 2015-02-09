@@ -77,6 +77,14 @@ function drawChart(sheetName) {
   query.send(function(response) {
     handleQueryResponse(sheetName, response);
   });
+  range  = 'range=H1:H1';
+  var descriptionQuery = new google.visualization.Query(
+      'https://docs.google.com/spreadsheets/d/19nKuPp1xQVWclduV1Jmfh1M67CgvloQh_PFpDMPs3Hk/edit?usp=sharing&' + range + '&sheet=' + sheetName);
+  descriptionQuery.send(function(response) {
+      var data = response.getDataTable();
+      $('#chart_description').html(data.getValue(0,0));
+  });
+
 }
 
 function handleQueryResponse(sheetName, response) {
@@ -115,8 +123,8 @@ function handleQueryResponse(sheetName, response) {
       width: '90%',
       height: '80%'
     },
-    height: $('#chart_container').height() * 0.8,
-    width: $('#chart_container').width() * 0.9,
+    height: $('#chart').height() * 0.8,
+    width: $('#chart').width() * 0.9,
     legend: { 
       position: 'none' 
     }
@@ -130,7 +138,6 @@ function handleQueryResponse(sheetName, response) {
     $('#loading').hide();
     $("#chart").show();
   });
-
   chart.draw(data, options);
 }
 
