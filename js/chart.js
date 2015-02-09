@@ -210,6 +210,7 @@ window.onLibsReady = function() {
 
     $("#chart_container").unbind().click(function() {
       $("#chart_container").hide();
+      $('#chart_container_holder').hide();
     });
   });
 };
