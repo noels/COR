@@ -82,7 +82,7 @@ function drawChart(sheetName) {
       'https://docs.google.com/spreadsheets/d/19nKuPp1xQVWclduV1Jmfh1M67CgvloQh_PFpDMPs3Hk/edit?usp=sharing&' + range + '&sheet=' + sheetName);
   descriptionQuery.send(function(response) {
       var data = response.getDataTable();
-      $('#chart_description').html(data.getValue(0,0));
+      $('#chart_description_inner').html(data.getValue(0,0));
   });
 
 }
@@ -141,7 +141,6 @@ function handleQueryResponse(sheetName, response) {
   chart.draw(data, options);
 }
 
-
 function _addMindmapNodes(chartNode, mindMapNode) {
   // if at a leaf then nothing to do
   if (!chartNode || chartNode instanceof Array) {
@@ -154,17 +153,16 @@ function _addMindmapNodes(chartNode, mindMapNode) {
     var key = keys[keyIndex];
 
     var nodeIsLeaf = false;
-    var _processNodeClick = function() {
-      if (nodeIsLeaf) {
-        drawChart(key);
-        $('#chart_container_holder').show();
-        $('#chart_container').show();
-      } else {
-        $('#chart_container_holder').hide();
-        $('#chart_container').hide();
-      }
-    }
-
+    var _processFunction = function(nodeIsLeaf, key) {
+        if (nodeIsLeaf) {
+            drawChart(key);
+            $('#chart_container_holder').show();
+            $('#chart_container').show();
+        } else {
+            $('#chart_container_holder').hide();
+            $('#chart_container').hide();
+        }
+    };
     var thisNode = $('body').addNode(mindMapNode, key, {
       href:'#',
       url:'#',
@@ -176,7 +174,7 @@ function _addMindmapNodes(chartNode, mindMapNode) {
           this.show();
         });
 
-        _processNodeClick();
+        _processFunction(nodeIsLeaf, node.name);
       }
     });
     
