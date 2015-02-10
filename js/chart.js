@@ -2,12 +2,14 @@ var charts = {
     Capabilities: {
         'PPM course completions': {
             sheetName: 'Capabilities',
+            dataRange: "A1:C100",
             chartOptions: {
                 chartType: 'bar'
             }
         },
         'Commercial course completions': {
             sheetName: 'Capabilities_0',
+            dataRange: "A1:C100",
             chartOptions: {
                 chartType: 'bar'
             }
@@ -201,7 +203,7 @@ function getChart(chartNode, chartName) {
 }
 
 function drawChart(chartName) {
-    var range = 'range=A2:B100';
+    var range = 'A2:B100';
 
     $("#loading").show();
     $("#chart").hide();
@@ -210,10 +212,10 @@ function drawChart(chartName) {
     var sheetName = chart.sheetName;
 
     if (chart.dataRange) {
-        range = chartOptions.dataRange;
+        range = chart.dataRange;
     }
     var query = new google.visualization.Query(
-        'https://docs.google.com/spreadsheets/d/19nKuPp1xQVWclduV1Jmfh1M67CgvloQh_PFpDMPs3Hk/edit?usp=sharing&' + range + '&sheet=' + sheetName);
+        'https://docs.google.com/spreadsheets/d/19nKuPp1xQVWclduV1Jmfh1M67CgvloQh_PFpDMPs3Hk/edit?usp=sharing&range=' + range + '&sheet=' + sheetName);
 
     query.send(function (response) {
         handleQueryResponse(chartName, chart, response);
@@ -258,14 +260,11 @@ function handleQueryResponse(chartName, chart, response) {
     var options = {
         title: chartName,
         chartArea: {
-            width: '90%',
+            width: '60%',
             height: '80%'
         },
         height: $('#chart').height() * 0.8,
         width: $('#chart').width() * 0.9,
-        legend: {
-            position: 'none'
-        }
     };
 
     if (chartOptions.vAxis) {
