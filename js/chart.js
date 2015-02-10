@@ -15,10 +15,18 @@ var charts = {
             }
         },
         'PPM course completions': {
-            sheetName: 'Capabilities_1'
+            sheetName: 'Capabilities_1',
+            dataRange: "A1:C100",
+            chartOptions: {
+                chartType: 'bar'
+            }
         },
         'Leading and managing change course completions':{
-            sheetName: 'Capabilities_2'
+            sheetName: 'Capabilities_2',
+            dataRange: "A1:C100",
+            chartOptions: {
+                chartType: 'bar'
+            }
         },
         '% completing CO Comms Pulse Survey': {
             sheetName: 'Capabilities_3',
