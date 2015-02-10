@@ -7,7 +7,10 @@ var charts = {
             }
         },
         'Commercial course completions': {
-            sheetName: 'Capabilities_0'
+            sheetName: 'Capabilities_0',
+            chartOptions: {
+                chartType: 'bar'
+            }
         },
         'PPM course completions': {
             sheetName: 'Capabilities_1'
@@ -36,10 +39,10 @@ var charts = {
     },
     Digital: {
         'GDS Transformation Savings 2013/14': {
-           sheetName: 'Digital_1',
+            sheetName: 'Digital_1',
+            dataRange: "A1B6",
             chartOptions: {
                 vAxis: {format: "##%"},
-                dataRange: "A1B6",
                 chartType: "pie"
             }
         },
@@ -205,16 +208,15 @@ function drawChart(chartName) {
 
     var chart = getChart(charts, chartName) || {};
     var sheetName = chart.sheetName;
-    var chartOptions = chart.chartOptions || {};
 
-    if (chartOptions.dataRange) {
+    if (chart.dataRange) {
         range = chartOptions.dataRange;
     }
     var query = new google.visualization.Query(
         'https://docs.google.com/spreadsheets/d/19nKuPp1xQVWclduV1Jmfh1M67CgvloQh_PFpDMPs3Hk/edit?usp=sharing&' + range + '&sheet=' + sheetName);
 
     query.send(function (response) {
-        handleQueryResponse(sheetName, response);
+        handleQueryResponse(chartName, chart, response);
     });
     range = 'range=H1:H1';
     var descriptionQuery = new google.visualization.Query(
@@ -226,7 +228,7 @@ function drawChart(chartName) {
 
 }
 
-function handleQueryResponse(sheetName, response) {
+function handleQueryResponse(chartName, chart, response) {
     if (!$('#loading').is(':visible')) {
         return;
     }
@@ -236,15 +238,12 @@ function handleQueryResponse(sheetName, response) {
         return;
     }
 
-    var sheetName = $('#charts').val() || sheetName;
-
     var data = response.getDataTable();
     var formatter = new google.visualization.DateFormat({formatType: 'short'});
     formatter.format(data, 0);
 
-    var chartOptions = leaf[0] || {};
+    var chartOptions = chart.chartOptions || {};
 
-    var chart;
     switch (chartOptions.chartType) {
         case 'pie':
             chart = new google.visualization.PieChart(document.getElementById('chart'));
@@ -257,7 +256,7 @@ function handleQueryResponse(sheetName, response) {
     }
 
     var options = {
-        title: sheetName,
+        title: chartName,
         chartArea: {
             width: '90%',
             height: '80%'
