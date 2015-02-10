@@ -203,7 +203,7 @@ function getChart(chartNode, chartName) {
 }
 
 function drawChart(chartName) {
-    var range = 'A2:B100';
+    var range = 'A1:B100';
 
     $("#loading").show();
     $("#chart").hide();
