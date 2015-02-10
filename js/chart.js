@@ -49,6 +49,7 @@ var charts = {
         MPA_7: null
     }
 };
+var leaf = [{}];
 
 
 function _alertError(msg) {
@@ -66,7 +67,7 @@ function drawChart(sheetName) {
     $("#loading").show();
     $("#chart").hide();
 
-    var chartOptions = charts[sheetName] || {};
+    var chartOptions = leaf[0] || {};
 
     if (chartOptions.dataRange) {
         range = chartOptions.dataRange;
@@ -103,7 +104,7 @@ function handleQueryResponse(sheetName, response) {
     var formatter = new google.visualization.DateFormat({formatType: 'short'});
     formatter.format(data, 0);
 
-    var chartOptions = charts[sheetName] || {};
+    var chartOptions = leaf[0] || {};
 
     var chart;
     switch (chartOptions.chartType) {
@@ -155,6 +156,7 @@ function _addMindmapNodes(chartNode, mindMapNode) {
         var nodeIsLeaf = false;
         var _processFunction = function (nodeIsLeaf, key) {
             if (nodeIsLeaf) {
+                leaf = chartNode[key] || [{}];
                 drawChart(key);
                 $('#chart_container_holder').show();
                 $('#chart_container').show();
