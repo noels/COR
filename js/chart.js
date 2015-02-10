@@ -225,7 +225,7 @@ function drawChart(chartName) {
         'https://docs.google.com/spreadsheets/d/19nKuPp1xQVWclduV1Jmfh1M67CgvloQh_PFpDMPs3Hk/edit?usp=sharing&' + range + '&sheet=' + sheetName);
     descriptionQuery.send(function (response) {
         var data = response.getDataTable();
-        $('#chart_description_inner').html(data.getValue(0, 0));
+        $('#chart_description').html('<div id="chart_description_inner">'+data.getValue(0, 0)+'</div>');
     });
 
 }

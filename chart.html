@@ -1,37 +1,35 @@
 <html>
 <head>
-  <title>COR data graphs</title>
-  <link rel="stylesheet" href="css/reset.css" />
-  <link rel="stylesheet" href="css/js-mindmap.css" />
-  <link rel="stylesheet" href="css/chart.css" />
+    <title>COR data graphs</title>
+    <link rel="stylesheet" href="css/reset.css"/>
+    <link rel="stylesheet" href="css/js-mindmap.css"/>
+    <link rel="stylesheet" href="css/chart.css"/>
 </head>
 <body>
-  <div id="overview"></div>
+<div id="overview"></div>
 
-  <div id="chart_container_holder"><!-- extra container div needed for IE-8 z-index to work -->
+<div id="chart_container_holder"><!-- extra container div needed for IE-8 z-index to work -->
     <div id="chart_container">
-      <div id="loading">
-        <p>Please wait, loading chart...</p>
-      </div>
-      <div id='chart'></div>
-      <div id='chart_description'>
-          <div id='chart_description_inner'></div>
-      </div>
+        <div id="loading">
+            <p>Please wait, loading chart...</p>
+        </div>
+        <div id='chart'></div>
+        <div id='chart_description'></div>
     </div>
-  </div>
+</div>
 
-  <div id='messages'></div>
- 
-  <script type="text/javascript" src="js/es5-shim.js"></script>
-  <script type="text/javascript" src="https://www.google.com/jsapi"></script>
-  <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/1.4.2/jquery.js"></script>
-  <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jqueryui/1.8.1/jquery-ui.js"></script>
-  <script type="text/javascript" src="js/raphael.js"></script>
-  <script type="text/javascript" src="js/js-mindmap.js"></script>
-  <script type="text/javascript" src="js/chart.js"></script>
-  <script type="text/javascript">
-    google.load("visualization", '1', {packages:['corechart', 'wordtree']});
+<div id='messages'></div>
+
+<script type="text/javascript" src="js/es5-shim.js"></script>
+<script type="text/javascript" src="https://www.google.com/jsapi"></script>
+<script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/1.4.2/jquery.js"></script>
+<script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jqueryui/1.8.1/jquery-ui.js"></script>
+<script type="text/javascript" src="js/raphael.js"></script>
+<script type="text/javascript" src="js/js-mindmap.js"></script>
+<script type="text/javascript" src="js/chart.js"></script>
+<script type="text/javascript">
+    google.load("visualization", '1', {packages: ['corechart', 'wordtree']});
     google.setOnLoadCallback(window.onLibsReady);
-  </script>
+</script>
 </body>
 </html>

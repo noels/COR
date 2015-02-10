@@ -27,25 +27,18 @@ body {
 #chart {
   top: 10%;
   left: 5%;
-  width: 60%;
+  width: 100%;
   height: 100%;
-  float: left;
 }
 
 #chart_description {
-  display: table;
-  height: 100%;
-  width: 40%;
-  float: left
+    width: 100%;
 }
-
 #chart_description_inner {
-    display: table-cell;
-    text-align: center;
-    vertical-align: middle;
+    margin: auto;
+    width: 80%;
     background-color: #fff;
 }
-
 
 #loading {
   font-size: 40px;
