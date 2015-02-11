@@ -1,7 +1,4 @@
-body {
-  font-size: 14px;
-  font-family: Arial, Verdana, sans-serif;
-}
+
 
 #chart_container_holder {
   display: none;
@@ -29,42 +26,4 @@ body {
   left: 5%;
   width: 100%;
   height: 100%;
-}
-
-#chart_description {
-    width: 100%;
-}
-#chart_description_inner {
-    margin: auto;
-    width: 80%;
-    background-color: #fff;
-}
-
-#loading {
-  font-size: 40px;
-  font-family: Verdana, sans-serif;
-  font-weight: bold;
-  text-align: center;
-  padding: 2em 0;
-  color: #fff;
-}
-
-#messages {
-  position: fixed;
-  top: 50px;
-  width: 100%;
-  z-index: 1000000;
-}
-
-#messages .error {
-  width: 70%;
-  display: block;
-  margin: 0.5em auto;
-  background-color: red;
-  color: #fff;
-  font-size: 2em;
-  padding: 1em;
-  -webkit-border-radius: 10px;
-  -moz-border-radius: 10px;
-  border-radius: 10px;
 }

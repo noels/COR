@@ -1,0 +1,35 @@
+<html>
+<head>
+    <title>Priority skills courses completed</title>
+    <link rel="stylesheet" href="css/reset.css"/>
+    <link rel="stylesheet" href="css/common.css"/>
+    <link rel="stylesheet" href="css/priority.css"/>
+</head>
+<body id="priority">
+
+    <h1>Priority skills courses completed</h1>
+
+    <select id="group"></select>
+
+    <div id="chart_container">
+        <div id="loading">
+            <p>Please wait, loading chart...</p>
+        </div>
+        <div id='chart'></div>
+        <div id='chart_description'></div>
+    </div>
+
+    <div id='messages'></div>
+
+    <script type="text/javascript" src="js/es5-shim.js"></script>
+    <script type="text/javascript" src="https://www.google.com/jsapi"></script>
+    <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/1.4.2/jquery.js"></script>
+    <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jqueryui/1.8.1/jquery-ui.js"></script>
+    <script type="text/javascript" src="js/common.js"></script>
+    <script type="text/javascript" src="js/priority.js"></script>
+    <script type="text/javascript">
+        google.load("visualization", '1', {packages: ['corechart']});
+        google.setOnLoadCallback(window.onLibsReady);
+    </script>
+</body>
+</html>
