@@ -1,0 +1,23 @@
+body {
+  padding: 0.5rem;
+}
+
+
+h1 {
+  font-size: 200%;
+  margin: 1rem 0;
+}
+
+#chart_container {
+  width: 100%;
+  min-height: 500px;
+}
+#chart {
+  float: left;
+  width: 80%;
+  height: 100%;
+}
+#chart_description {
+  float: right;
+  width: 20%;
+}
