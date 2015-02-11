@@ -57,7 +57,7 @@ var charts = {
             }
         },
         'Digital and ICT spend controls and wider savings':{
-            sheetName: 'Digital_1_2',
+            sheetName: 'Digital_1_2'
         },
         'Number of department and ALB websites transferred to gov.uk': {
             sheetName: 'Digital_2'
@@ -272,7 +272,7 @@ function handleQueryResponse(chartName, chart, response) {
             height: '80%'
         },
         height: $('#chart').height() * 0.8,
-        width: $('#chart').width() * 0.9,
+        width: $('#chart').width() * 0.9
     };
 
     if (chartOptions.vAxis) {
