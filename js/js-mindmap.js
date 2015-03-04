@@ -77,13 +77,16 @@
       this.size = 'size' + opts.size;
     }
     // else { this.size = "100px"; }
+      if (!opts.container){
+          opts.container = 'body';
+      }
 
 
 
     // create the element for display
     // this.el = $('<a href="' + this.href + '" style="width: ' + this.size + '; height: ' + this.size + ';"><div><span>' + this.name + '</span></div></a>').addClass('node').addClass(this.color);
     this.el = $('<a href="' + this.href + '"><div><span>' + this.name + '</span></div></a>').addClass('node').addClass(this.color).addClass(this.size);
-    $('body').prepend(this.el);
+    $(obj).prepend(this.el);
 
 
     if (!parent) {
@@ -144,7 +147,9 @@
 
   // ROOT NODE ONLY:  control animation loop
   Node.prototype.animateToStatic = function () {
-
+    if (this.mindmapInit) {
+      return;
+    }
     clearTimeout(this.moveTimer);
     // stop the movement after a certain time
     var thisnode = this;
@@ -174,7 +179,7 @@
     }
     setTimeout(function () {
       mynode.animateLoop();
-    }, 10);
+    }, 50);
   };
 
   // find the right position for this node
@@ -382,7 +387,7 @@
           theta = Math.atan(y1 / x1);
         }
         // force is based on radial distance
-        f = (0.1 * this.options.attract * dist * CENTRE_FORCE) / 1000;
+        f = (0.1 * this.options.attract * dist * CENTRE_FORCE) / 2000;
         fx += f * Math.cos(theta) * xsign;
         fy += f * Math.sin(theta) * xsign;
       }

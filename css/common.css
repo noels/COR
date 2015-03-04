@@ -4,15 +4,92 @@ html {
 
 body {
   font-family: Arial, Verdana, sans-serif;
+    margin: 0;
+    padding: 0;
+}
+#topbar-wrapper {
+    font-family: "nta",Arial,sans-serif;
+    font-size: 16px;
+    line-height: 1.25;
+    font-weight: 400;
+    text-transform: none;
+    background-color: #0b0c0c;
+    color: white;
+}
+#topbar {
+    margin: 0 auto;
+}
+#overview {
+    padding: 40px;
+}
+#overlay {
+    background: #1e1e1e;
+    opacity: .5;
+    position:fixed;
+    top:0px;
+    bottom:0px;
+    left:0px;
+    right:0px;
+    z-index:100;
+}
+
+#chart_box {
+    position: relative;
+    background-color:#c0c0c0;
+    opacity: .9;
+    z-index:101;
+    width: 70%;
+    margin: auto;
+    height: 100%;
+}
+#chart_close {
+    float: right;
+    cursor: pointer;
+    color: #fff;
+    border-radius: 30px;
+    font-size: 30PX;
+    font-weight: bold;
+    display: inline-block;
+    line-height: 0px;
+    padding: 12px 3px;
+    margin-top: 15px;
+    margin-right: 10px;
+}
+
+#chart_close:before {
+    content: "x";
+}
+#chart_header {
+    background-color: #005ea5;
+    color: white;
+    font-size: 20px;
+    margin: 0 auto;
+    margin-top: 30px;
+    padding: 20px 20px;
+}
+#chart_header h1 {
+    padding: 0 0 20px 0;
+}
+#chart_container {
+    display: table;
+    background-color: #fff;
+    width: 100%;
+    height: 100%;
+}
+#chart {
+    display: table-cell;
+    width: 75%;
+    min-height: 550px;
 }
 
 #chart_description {
-    width: 100%;
+    position: absolute;
+    display: table-cell;
+    width: 15%;
+    padding: 20px;
 }
 #chart_description_inner {
     margin: auto;
-    width: 80%;
-    background-color: #fff;
 }
 
 #loading {

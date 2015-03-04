@@ -1,0 +1,51 @@
+<html>
+<head>
+    <title>Visulaisations</title>
+    <link rel="stylesheet" href="css/reset.css"/>
+    <link rel="stylesheet" href="css/js-mindmap.css"/>
+    <link rel="stylesheet" href="css/common.css"/>
+</head>
+<body id="priority">
+    <div id="topbar-wrapper">
+        <header id="topbar">
+            <div class="box top left" id="global-header-logo">
+                <a href="http://data.gov.uk" title="Go to the Data.gov.uk homepage" id="logo" class="content"><img
+                        src="http://standards.data.gov.uk/sites/all/themes/gdstheme/logo.png" width="35" height="31" alt="">data.gov.uk</a>
+            </div>
+        </header>
+    </div>
+    <div id="overlay" style="display:none;"></div>
+    <div id="overview"></div>
+
+    <div id="chart_box" style="display:none;">
+        <a id="chart_close"></a>
+        <div id="chart_header">
+            <h1 id="chart_title"></h1>
+            <select id="group"></select>
+        </div>
+        <div id="chart_container">
+            <div id="loading">
+                <p>Please wait, loading chart...</p>
+            </div>
+            <div id='chart'></div>
+            <div id='chart_description'></div>
+        </div>
+    </div>
+
+    <div id='messages'></div>
+
+    <script type="text/javascript" src="js/es5-shim.js"></script>
+    <script type="text/javascript" src="https://www.google.com/jsapi"></script>
+    <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/1.4.2/jquery.js"></script>
+    <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jqueryui/1.8.1/jquery-ui.js"></script>
+    <script type="text/javascript" src="js/raphael.js"></script>
+    <script type="text/javascript" src="js/js-mindmap.js"></script>
+    <script type="text/javascript" src="js/data.js"></script>
+    <script type="text/javascript" src="js/common.js"></script>
+    <script type="text/javascript" src="js/multi.js"></script>
+    <script type="text/javascript">
+        google.load("visualization", '1', {packages: ['corechart']});
+        google.setOnLoadCallback(window.onLibsReady);
+    </script>
+</body>
+</html>
