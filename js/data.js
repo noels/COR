@@ -61,7 +61,7 @@ var charts = {
     'Digital transformation savings': {
         'GDS Transformation Savings 2013/14': {
             sheetName: 'Digital_1',
-            dataRange: "A1B6",
+            dataRange: "A2B6",
             chartOptions: {
                 vAxis: {format: "##%"},
                 chartType: "pie"
