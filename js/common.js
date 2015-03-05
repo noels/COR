@@ -41,7 +41,6 @@ function queryChart(sheetName, range, cb) {
             return;
         }
 
-        console.log(response.getDataTable());
 
         cb(response);
     });
