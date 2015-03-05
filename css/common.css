@@ -16,9 +16,31 @@ body {
     background-color: #0b0c0c;
     color: white;
 }
+#topbar-wrapper header{
+    max-width: 960px;
+    margin: 0 auto;
+}
+#topbar-wrapper #global-header-logo {
+    font-family: "nta",Arial,sans-serif;
+    font-size: 27px;
+    line-height: 1.11111;
+    font-weight: 400;
+    text-transform: none;
+    padding: 7.5px 0px 10px 0px;
+}
+#topbar-wrapper #global-header-logo a {
+    text-decoration: none;
+    color: white;
+}
+#topbar-wrapper #global-header-logo img {
+    position: relative;
+    bottom: -5px;
+    padding-right: 10px;
+}
 #topbar {
     margin: 0 auto;
 }
+
 #overview {
     padding: 40px;
 }
